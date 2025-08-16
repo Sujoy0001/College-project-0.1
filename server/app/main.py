@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from routes import teacher, admin, course, allotments, view
 from fastapi.middleware.cors import CORSMiddleware
-from config import MONGO_URL
     
 app = FastAPI()
 
@@ -15,8 +14,7 @@ app.add_middleware(
 
 @app.get("/")
 async def index():
-    text = MONGO_URL
-    return {"message": "Ami ar parchi na.", "text": text}
+    return {"message": "Ami ar parchi na."}
 
 app.include_router(teacher.router, prefix="/auth", tags=["auth"])
 app.include_router(course.router, prefix="/add", tags=["course"])
