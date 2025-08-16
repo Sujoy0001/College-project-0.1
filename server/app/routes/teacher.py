@@ -1,0 +1,67 @@
+from fastapi import APIRouter, HTTPException
+from models.teachers import teachers_register, teacher_login
+from db.database import teachers_collection
+from utils.hash_pass import create_access_token
+from utils.jwt_handler import hash_password, verify_password
+
+router = APIRouter()
+
+# ✅ Get next teacher ID
+async def get_next_teachers_id():
+    last_teacher = await teachers_collection.find_one(sort=[("id", -1)])
+    if last_teacher:
+        return last_teacher["id"] + 1
+    return 2501  # First teacher starts from 2501
+
+# ✅ Register Teacher
+@router.post("/register")
+async def register(user: teachers_register):
+    if await teachers_collection.find_one({"email": user.email}):
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    user_dict = user.dict()
+    user_dict["password"] = hash_password(user.password)
+    user_dict["id"] = await get_next_teachers_id()
+
+    await teachers_collection.insert_one(user_dict)
+
+    return {"message": "Teacher registered successfully", "id": user_dict["id"]}
+
+# ✅ Teacher Login
+@router.post("/login")
+async def login(user: teacher_login):
+    user_in_db = await teachers_collection.find_one({"email": user.email})
+
+    if not user_in_db:
+        raise HTTPException(status_code=404, detail="Email not registered")
+
+    if not verify_password(user.password, user_in_db["password"]):
+        raise HTTPException(status_code=401, detail="Invalid password")
+
+    token = create_access_token({
+        "id": user_in_db["id"],
+        "name": user_in_db["name"],
+        "email": user_in_db["email"],
+    })
+
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "email": user_in_db["email"],
+    }
+
+# ✅ List All Teachers
+@router.get("/list")
+async def list_teachers():
+    teachers = []
+    async for teacher in teachers_collection.find({}, {"password": 0}):  # hide password
+        teachers.append(teacher)
+    return {"teachers": teachers}
+
+# ✅ Delete Teacher by Email
+@router.delete("/delete/{email}")
+async def delete_teacher(email: str):
+    result = await teachers_collection.delete_one({"email": email})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Teacher not found")
+    return {"message": f"Teacher with email {email} deleted successfully"}
