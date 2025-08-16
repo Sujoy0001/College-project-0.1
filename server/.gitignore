@@ -1,38 +1,84 @@
-# ---- Python cache ----
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.pyc
+*$py.class
 
-# ---- Virtual environment ----
-server/venv/
+# C extensions
+*.so
 
-# ---- Environment variables ----
-server/.env
-server/.env.*
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
 
-# ---- FastAPI / Uvicorn logs ----
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Pyre type checker
+.pyre/
+
+# MyPy type checker
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pylint
+pylint-report.txt
+pylint-global.txt
+
+# VSCode settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS
+.DS_Store
+
+# dotenv environment files
+.env
+.env.*
+
+# Logs
 *.log
 
-# ---- Testing ----
-.coverage
-htmlcov/
-.pytest_cache/
+# Docker
+*.dockerfile
+Dockerfile
 
-# ---- Database files ----
-*.db
+# Local database files (if using SQLite for dev)
 *.sqlite3
 
-# ---- Migrations (Alembic) ----
-alembic/versions/*.py
-
-# ---- IDE / Editor ----
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# ---- OS files ----
-.DS_Store
-Thumbs.db
+# FastAPI specific
+instance/
