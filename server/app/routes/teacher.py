@@ -50,13 +50,20 @@ async def login(user: teacher_login):
         "email": user_in_db["email"],
     }
 
-# ✅ List All Teachers
 @router.get("/list")
 async def list_teachers():
-    teachers = []
-    async for teacher in teachers_collection.find({}, {"password": 0}):  # hide password
-        teachers.append(teacher)
-    return {"teachers": teachers}
+    try:
+        teachers = []
+        async for teacher in teachers_collection.find({}, {"password": 0}):
+            teachers.append({
+                "id": str(teacher["_id"]),
+                "name": teacher.get("name"),
+                "email": teacher.get("email"),
+                "dept": teacher.get("dept")
+            })
+        return teachers
+    except Exception as e:
+        return {"error": str(e)}
 
 # ✅ Delete Teacher by Email
 @router.delete("/delete/{email}")
