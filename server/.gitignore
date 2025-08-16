@@ -1,42 +1,38 @@
-# Byte-compiled / cache files
+# ---- Python cache ----
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *.pyc
 
-# Virtual environment
-venv/
-.env/
-ENV/
-.venv/
+# ---- Virtual environment ----
+server/venv/
 
-# FastAPI / Uvicorn logs
+# ---- Environment variables ----
+server/.env
+server/.env.*
+
+# ---- FastAPI / Uvicorn logs ----
 *.log
 
-# IDEs and editors
+# ---- Testing ----
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ---- Database files ----
+*.db
+*.sqlite3
+
+# ---- Migrations (Alembic) ----
+alembic/versions/*.py
+
+# ---- IDE / Editor ----
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS files
+# ---- OS files ----
 .DS_Store
 Thumbs.db
-
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-
-# Migrations (if using Alembic/SQLAlchemy)
-alembic/versions/*.py
-
-# Databases
-*.db
-*.sqlite3
-
-# Environment files
-.env.local
-.env.*
-.env
