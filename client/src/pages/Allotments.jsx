@@ -9,6 +9,8 @@ const Allotments = () => {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [courseSelectValue, setCourseSelectValue] = useState(""); // NEW
+
 
   // Fetch teachers
   useEffect(() => {
@@ -126,16 +128,24 @@ const Allotments = () => {
       {/* Course Dropdown */}
       <label className="block font-medium">Select Courses:</label>
       <select
-        onChange={handleCourseSelect}
+        value={courseSelectValue}  // controlled
+        onChange={(e) => {
+            const courseId = parseInt(e.target.value);
+            setCourseSelectValue(""); // reset dropdown immediately
+            if (!selectedCourses.includes(courseId) && courseId) {
+            setSelectedCourses([...selectedCourses, courseId]);
+            }
+        }}
         className="w-full border rounded p-2 mb-4"
-      >
+        >
         <option value="">-- Select a Course --</option>
         {courses.map((course) => (
-          <option key={course.id} value={course.id}>
+            <option key={course.id} value={course.id}>
             {course.course_name} ({course.course_code})
-          </option>
+            </option>
         ))}
       </select>
+
 
       {/* Selected Courses */}
       <div className="mb-4">
