@@ -16,7 +16,7 @@ export default function Layout01() {
       <Header />
       
       {/* Main content grows to fill remaining space */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-0">
         <Outlet />
       </main>
       

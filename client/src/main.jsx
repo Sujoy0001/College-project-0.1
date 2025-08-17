@@ -12,6 +12,9 @@ import TeacherList from './pages/TeacherList.jsx';
 import CourseList from './pages/CourseList.jsx';
 import DownloadList from './pages/DownloadList.jsx';
 import AllotmentsListView from './pages/AllotmentsListView.jsx';
+import TeacherDetails from './pages/TeacherDetails.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import Allotments from './pages/Allotments.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,13 @@ const router = createBrowserRouter([
       { path: "/teacher/list", element: <TeacherList /> },
       { path: "/course/all", element: <CourseList /> },
       { path: "/allotments/list", element: <AllotmentsListView /> },
-      { path: "/dowload/list", element: <DownloadList />}
+      { path: "/dowload/list", element: <DownloadList />},
+      { path: "/teacher", element: <TeacherDetails /> },
+      { path: "/admin/dashboard", element: <AdminDashboard /> },
+      { path: "/allotments", element: <Allotments /> },
+      { path: "/teacher", element: <TeacherDetails /> },
+      { path: "/teacher", element: <TeacherDetails /> },
+      { path: "/teacher", element: <TeacherDetails /> },
     ]
   },
 ]);
