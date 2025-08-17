@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { 
-  FaUsers, 
-  FaBook, 
+  FaUsers,
   FaUserFriends,
   FaFileDownload,
-  FaChartLine,
-  FaCog,
-  FaCalendarAlt,
-  FaBell
+  FaPaperclip,
+  FaEdit,
+  FaRegIdCard,
+  FaBook,
+  FaUserEdit,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
@@ -44,13 +44,13 @@ function AdminDashboard() {
   const quickActions = [
     {
       name: "Manage Teachers",
-      path: "/teacher/list",
-      icon: <FaUsers className="text-xl" />,
+      path: "/admin/teacher/edit",
+      icon: <FaUserEdit className="text-xl" />,
       description: "View and manage all teacher accounts",
     },
     {
       name: "Course Catalog",
-      path: "/course/all",
+      path: "/admin/courses/edit",
       icon: <FaBook className="text-xl" />,
       description: "Browse and edit course offerings",
     },
@@ -62,51 +62,37 @@ function AdminDashboard() {
     },
     {
       name: "Generate Reports",
-      path: "/reports",
+      path: "admin/dowload/list",
       icon: <FaFileDownload className="text-xl" />,
-      description: "Download system data and reports",
+      description: "Download allotments data and reports",
     },
   ];
 
   const adminTools = [
     {
       name: "Assign Courses",
-      path: "/allotments",
-      icon: <FaCog className="text-xl" />,
+      path: "/admin/allotments",
+      icon: <FaPaperclip className="text-xl" />,
     },
     {
-      name: "Analytics",
-      path: "/admin/analytics",
-      icon: <FaChartLine className="text-xl" />,
+      name: "Edit Allotments",
+      path: "/admin/allotments/edit",
+      icon: <FaEdit className="text-xl" />,
     },
     {
-      name: "Academic Calendar",
-      path: "/admin/calendar",
-      icon: <FaCalendarAlt className="text-xl" />,
+      name: "Teacher Register",
+      path: "/admin/teacher/register",
+      icon: <FaRegIdCard  className="text-xl" />,
     },
     {
-      name: "Notifications",
-      path: "/admin/notifications",
-      icon: <FaBell className="text-xl" />,
+      name: "Add New Courses",
+      path: "/admin/add",
+      icon: <FaBook className="text-xl" />,
     },
   ];
 
   return (
     <div className="min-h-full px-0 py-0">
-      {/* Header */}
-      <header className={`py-6 px-0 ${darkMode ? "bg-zinc-800" : "bg-white"} shadow-sm`}>
-        <div className="max-w-7xl px-6 mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">
-            <span className={darkMode ? "text-blue-400" : "text-blue-600"}>Admin</span> Dashboard
-          </h1>
-          <div className="flex items-center space-x-4">
-            <span className={`px-3 py-1 rounded-full text-sm ${darkMode ? "bg-zinc-700 text-blue-400" : "bg-blue-100 text-blue-800"}`}>
-              Administrator
-            </span>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Stats Cards */}
@@ -152,7 +138,7 @@ function AdminDashboard() {
               <Link 
                 to={action.path} 
                 key={index}
-                className={`group block p-6 rounded-xl shadow-sm transition-all hover:shadow-md ${darkMode ? "bg-zinc-800 hover:bg-zinc-700" : "bg-white hover:bg-gray-50"}`}
+                className={`group block p-6 rounded-xl shadow-sm transition-all hover:shadow-md ${darkMode ? "bg-zinc-800 hover:bg-zinc-700" : "bg-white hover:bg-sky-50"}`}
               >
                 <div className={`p-3 rounded-lg inline-flex ${darkMode ? "bg-zinc-700 text-blue-400" : "bg-blue-100 text-blue-800"} group-hover:scale-105 transition-transform`}>
                   {action.icon}
@@ -176,12 +162,12 @@ function AdminDashboard() {
               <Link
                 to={tool.path}
                 key={index}
-                className={`flex flex-col items-center p-4 rounded-lg ${darkMode ? "bg-zinc-800 hover:bg-zinc-700" : "bg-white hover:bg-gray-100"} shadow-sm transition-colors`}
+                className={`flex flex-col items-center px-4 py-10 rounded-lg ${darkMode ? "bg-zinc-800 hover:bg-zinc-700" : "bg-white hover:bg-sky-50"} shadow-sm transition-colors`}
               >
-                <div className={`p-3 rounded-full mb-2 ${darkMode ? "bg-zinc-700 text-blue-400" : "bg-blue-100 text-blue-800"}`}>
+                <div className={`p-4 rounded-full mb-2 ${darkMode ? "bg-zinc-700 text-blue-400" : "bg-blue-100 text-blue-800"}`}>
                   {tool.icon}
                 </div>
-                <span className="text-sm font-medium">{tool.name}</span>
+                <span className="text-lg font-medium">{tool.name}</span>
               </Link>
             ))}
           </div>

@@ -38,7 +38,7 @@ function AdminLogin() {
       localStorage.setItem("adminEmail", email);
 
       // Redirect to Admin Dashboard
-      navigate("/admin/dashboard");
+      navigate("/admin");
     } catch (err) {
       setError(err.message || "Login failed. Please try again.");
     } finally {

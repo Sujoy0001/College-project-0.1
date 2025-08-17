@@ -15,6 +15,12 @@ import AllotmentsListView from './pages/AllotmentsListView.jsx';
 import TeacherDetails from './pages/TeacherDetails.jsx';
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import Allotments from './pages/Allotments.jsx';
+import EditAllotments from './pages/EditAllotments.jsx';
+import Layout02 from './layout/Layout2.jsx';
+import CourseRegister from './pages/CourseRegister.jsx';
+import AdminTeacherList from './pages/AdminTeacherDetails.jsx';
+import AdminCourseList from './pages/AdminCourseList.jsx';
+import DownloadPDF from './pages/DownloadList.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,20 +29,29 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/teacher/login", element: <TeacherLogin /> },
-      { path: "/teacher/register", element: <TeacherRegister /> },
       { path: "/admin/login", element: <AdminLogin /> },
       { path: "/teacher/list", element: <TeacherList /> },
       { path: "/course/all", element: <CourseList /> },
       { path: "/allotments/list", element: <AllotmentsListView /> },
       { path: "/dowload/list", element: <DownloadList />},
       { path: "/teacher", element: <TeacherDetails /> },
-      { path: "/admin/dashboard", element: <AdminDashboard /> },
-      { path: "/allotments", element: <Allotments /> },
-      { path: "/teacher", element: <TeacherDetails /> },
-      { path: "/teacher", element: <TeacherDetails /> },
-      { path: "/teacher", element: <TeacherDetails /> },
+      
     ]
   },
+  {
+    path: "/admin",
+    element: <Layout02 />,
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: "allotments", element: <Allotments /> },
+      { path: "allotments/edit", element: <EditAllotments /> },
+      { path: "teacher/register", element: <TeacherRegister /> },
+      { path: "add", element: <CourseRegister /> },
+      { path: "teacher/edit", element: <AdminTeacherList /> },
+      { path: "courses/edit", element: <AdminCourseList /> },
+      { path: "admin/dowload/list", element: <DownloadList />},
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

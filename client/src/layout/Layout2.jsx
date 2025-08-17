@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useTheme } from "../context/ThemeContext";
+import Header2 from "../components/Header2";
 
-export default function Layout01() {
+export default function Layout02() {
   const { darkMode } = useTheme();
 
   return (
@@ -14,6 +15,7 @@ export default function Layout01() {
       }`}
     >
       <Header />
+      <Header2 />
       
       {/* Main content grows to fill remaining space */}
       <main className="flex-1 p-0">

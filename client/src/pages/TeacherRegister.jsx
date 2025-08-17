@@ -3,6 +3,9 @@ import { useTheme } from "../context/ThemeContext";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUniversity } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+// ✅ load backend URL from .env
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function TeacherRegister() {
   const { darkMode } = useTheme();
   const [formData, setFormData] = useState({
@@ -13,7 +16,6 @@ function TeacherRegister() {
     confirmPassword: ""
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -22,7 +24,7 @@ function TeacherRegister() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
@@ -30,27 +32,44 @@ function TeacherRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validation
+
+    // ✅ validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    if (formData.password.length < 8) {
-      setError("Password must be at least 8 characters");
+    if (formData.password.length < 4) {
+      setError("Password must be at least 4 characters");
       return;
     }
 
     setIsLoading(true);
     setError("");
-    
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log("Registration data:", formData);
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          dept: formData.department,
+          password: formData.password
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
+      console.log("✅ Registration success:", data);
       setSuccess(true);
     } catch (err) {
-      setError("Registration failed. Please try again.");
+      setError(err.message || "Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -58,7 +77,7 @@ function TeacherRegister() {
 
   if (success) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${
+      <div className={`min-h-full flex items-center justify-center p-4 transition-colors duration-300 ${
         darkMode ? "bg-zinc-900 text-zinc-100" : "bg-gray-50 text-zinc-900"
       }`}>
         <div className={`w-full max-w-md rounded-xl shadow-lg overflow-hidden transition-all duration-300 ${
@@ -176,7 +195,7 @@ function TeacherRegister() {
                     ? "border-zinc-700 bg-zinc-800 text-white focus:ring-blue-500 focus:border-blue-500"
                     : "border-gray-300 bg-white text-zinc-900 focus:ring-blue-500 focus:border-blue-500"
                 }`}
-                placeholder="teacher@school.edu"
+                placeholder="teacher@college.edu"
               />
               <div className={`absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ${
                 darkMode ? "text-zinc-400" : "text-zinc-500"
@@ -226,6 +245,7 @@ function TeacherRegister() {
           </div>
 
           {/* Password */}
+          {/* Password */}
           <div className="space-y-1">
             <label htmlFor="password" className={`block text-sm font-medium ${
               darkMode ? "text-zinc-300" : "text-zinc-700"
@@ -240,7 +260,7 @@ function TeacherRegister() {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                minLength="8"
+                minLength="4"
                 className={`w-full pl-10 pr-10 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all duration-200 ${
                   darkMode
                     ? "border-zinc-700 bg-zinc-800 text-white focus:ring-blue-500 focus:border-blue-500"
@@ -264,12 +284,42 @@ function TeacherRegister() {
                 {showPassword ? <FaEyeSlash className="h-4 w-4" /> : <FaEye className="h-4 w-4" />}
               </button>
             </div>
-            <p className={`text-xs ${
-              darkMode ? "text-zinc-500" : "text-gray-500"
-            }`}>
-              Must be at least 8 characters
+            <p className={`text-xs ${darkMode ? "text-zinc-500" : "text-gray-500"}`}>
+              Must be at least 4 characters
             </p>
           </div>
+
+          {/* Confirm Password */}
+          <div className="space-y-1">
+            <label htmlFor="confirmPassword" className={`block text-sm font-medium ${
+              darkMode ? "text-zinc-300" : "text-zinc-700"
+            }`}>
+              Confirm Password
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                minLength="4"
+                className={`w-full pl-10 pr-10 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all duration-200 ${
+                  darkMode
+                    ? "border-zinc-700 bg-zinc-800 text-white focus:ring-blue-500 focus:border-blue-500"
+                    : "border-gray-300 bg-white text-zinc-900 focus:ring-blue-500 focus:border-blue-500"
+                }`}
+                placeholder="••••••••"
+              />
+              <div className={`absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ${
+                darkMode ? "text-zinc-400" : "text-zinc-500"
+              }`}>
+                <FaLock className="h-4 w-4" />
+              </div>
+            </div>
+          </div>
+
           
 
           {/* Submit Button */}

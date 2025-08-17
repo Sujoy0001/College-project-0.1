@@ -64,7 +64,7 @@ function Home() {
           {navItems.map((item, index) => (
             <Link to={item.path}>
               <div key={index} className={`flex flex-col items-center w-full font-medium py-8 px-4 rounded-md shadow-md transition duration-300 text-center cursor-pointer ${
-                    darkMode ? "bg-zinc-900 hover:bg-zinc-800 text-white" : "bg-blue-600 hover:bg-sky-800 text-white"
+                    darkMode ? "bg-zinc-900 hover:bg-zinc-800 text-white" : "bg-white hover:bg-sky-50 text-black"
                   }`}>
                 {/* Icon container with circular background */}
                 <div className={`mb-3 p-4 rounded-full ${
