@@ -345,22 +345,6 @@ function TeacherRegister() {
             )}
           </button>
         </form>
-
-        {/* Footer */}
-        <div className={`px-6 py-4 text-center border-t ${
-          darkMode ? "border-zinc-700 bg-zinc-900/50" : "border-gray-200 bg-gray-50"
-        }`}>
-          <p className={`text-sm ${
-            darkMode ? "text-zinc-400" : "text-zinc-600"
-          }`}>
-            Already have an account?{' '}
-            <Link to="/teacher/login" className={`font-medium hover:underline ${
-              darkMode ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-500"
-            }`}>
-              Login here
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   );

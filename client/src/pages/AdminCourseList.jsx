@@ -168,7 +168,7 @@ const AdminCourseList = () => {
             <div>
               <h2 className="text-2xl font-bold flex items-center gap-2">
                 <FaBook className="text-blue-500" />
-                Admin Course Management
+                Course Management
               </h2>
               <p className={`text-sm ${darkMode ? "text-zinc-400" : "text-zinc-500"}`}>
                 Showing {filteredCourses.length} of {courses.length} courses

@@ -21,6 +21,7 @@ import CourseRegister from './pages/CourseRegister.jsx';
 import AdminTeacherList from './pages/AdminTeacherDetails.jsx';
 import AdminCourseList from './pages/AdminCourseList.jsx';
 import DownloadPDF from './pages/DownloadList.jsx';
+import AdminAllotmentsListView from './pages/AdminAllotmentsListView.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,8 @@ const router = createBrowserRouter([
       { path: "add", element: <CourseRegister /> },
       { path: "teacher/edit", element: <AdminTeacherList /> },
       { path: "courses/edit", element: <AdminCourseList /> },
-      { path: "admin/dowload/list", element: <DownloadList />},
+      { path: "dowload/list", element: <DownloadList />},
+      { path: "allotmentslist/edit", element: <AdminAllotmentsListView /> },
     ]
   }
 ]);

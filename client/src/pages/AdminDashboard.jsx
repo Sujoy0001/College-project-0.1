@@ -56,13 +56,13 @@ function AdminDashboard() {
     },
     {
       name: "Allotments",
-      path: "/allotments/list",
+      path: "/admin/allotmentslist/edit",
       icon: <FaUserFriends className="text-xl" />,
       description: "Manage teacher-course assignments",
     },
     {
       name: "Generate Reports",
-      path: "admin/dowload/list",
+      path: "dowload/list",
       icon: <FaFileDownload className="text-xl" />,
       description: "Download allotments data and reports",
     },

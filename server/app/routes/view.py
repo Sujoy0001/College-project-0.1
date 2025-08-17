@@ -14,25 +14,24 @@ async def view_teacher_details(teacher_email: str):
         raise HTTPException(status_code=404, detail="Teacher not found")
 
     allotment = await allotments_collection.find_one({"teacher_email": teacher_email})
-    if not allotment:
-        raise HTTPException(status_code=404, detail="No courses assigned to this teacher")
 
     courses = []
-    for cid in allotment.get("course_ids", []):
-        course = await courses_collection.find_one({"id": cid})
-        if course:
-            courses.append({
-                "course_name": course["course_name"],
-                "course_code": course["course_code"],
-                "hours": course["hours"]
-            })
+    if allotment:
+        for cid in allotment.get("course_ids", []):
+            course = await courses_collection.find_one({"id": cid})
+            if course:
+                courses.append({
+                    "course_name": course["course_name"],
+                    "course_code": course["course_code"],
+                    "hours": course["hours"]
+                })
 
     return {
         "teacher": {
             "name": teacher["name"],
             "email": teacher["email"],
         },
-        "courses": courses
+        "courses": courses  # ✅ Empty list if no courses allotted
     }
 
 
