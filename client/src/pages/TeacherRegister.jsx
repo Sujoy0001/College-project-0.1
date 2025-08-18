@@ -117,12 +117,12 @@ function TeacherRegister() {
 
   return (
     <div className="min-h-full flex items-center justify-center px-4 py-8 transition-colors duration-300">
-      <div className={`w-full max-w-md rounded-xl shadow-lg overflow-hidden transition-all duration-300 ${
+      <div className={`w-full max-w-md rounded shadow-lg overflow-hidden transition-all duration-300 ${
         darkMode ? "bg-zinc-800 shadow-zinc-950" : "bg-white shadow-gray-200"
       }`}>
         {/* Header */}
         <div className={`p-6 text-center border-b ${
-          darkMode ? "border-zinc-700 bg-zinc-900" : "border-gray-200 bg-gray-100"
+          darkMode ? "border-zinc-700 bg-zinc-900" : "border-gray-200 bg-white"
         }`}>
           <h2 className="text-2xl font-bold flex items-center justify-center gap-2">
             <FaUser className="text-blue-500" />
@@ -326,7 +326,7 @@ function TeacherRegister() {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-lg shadow-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 ${
+            className={`w-full cursor-pointer flex justify-center items-center py-2 px-4 border border-transparent rounded-lg shadow-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 ${
               isLoading ? "opacity-80 cursor-not-allowed" : ""
             } ${
               darkMode ? "focus:ring-offset-zinc-800" : "focus:ring-offset-white"

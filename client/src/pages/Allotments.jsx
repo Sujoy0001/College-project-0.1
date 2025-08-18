@@ -159,7 +159,7 @@ const Allotments = () => {
                   {course?.course_name} ({course?.course_code})
                   <button
                     onClick={() => handleRemoveCourse(id)}
-                    className="ml-4 text-red-600 hover:underline"
+                    className="ml-4 text-red-600 hover:underline cursor-pointer"
                   >
                     Remove
                   </button>
@@ -176,7 +176,7 @@ const Allotments = () => {
       <button
         onClick={handleSubmit}
         disabled={loading}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-700"
       >
         {loading ? "Assigning..." : "Submit Allotment"}
       </button>

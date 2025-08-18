@@ -59,7 +59,7 @@ const CourseRegister = () => {
     <div
       className="min-h-full flex items-center justify-center">
       <div
-        className={`max-w-md w-full mt-10 p-6 rounded-xl shadow-lg border ${
+        className={`max-w-md w-full mt-10 p-6 rounded shadow-lg border ${
           darkMode ? "bg-zinc-800 border-zinc-700" : "bg-white border-gray-200"
         }`}
       >
@@ -124,7 +124,7 @@ const CourseRegister = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 rounded-lg transition ${
+            className={`w-full py-2 rounded-lg transition cursor-pointer ${
               darkMode
                 ? "bg-blue-500 hover:bg-blue-600 text-white"
                 : "bg-blue-600 hover:bg-blue-700 text-white"

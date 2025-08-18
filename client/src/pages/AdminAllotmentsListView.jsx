@@ -129,9 +129,9 @@ const AdminAllotmentsListView = () => {
 
   return (
     <div className="min-h-full px-4 py-8">
-      <div className={`max-w-6xl mx-auto rounded-lg shadow-md overflow-hidden ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
+      <div className={`max-w-6xl mx-auto rounded shadow-md overflow-hidden ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
         {/* Header */}
-        <div className={`p-4 border-b ${darkMode ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-sky-50'}`}>
+        <div className={`p-4 border-b ${darkMode ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-white'}`}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold flex items-center gap-2">

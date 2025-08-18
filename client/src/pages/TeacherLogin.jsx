@@ -65,7 +65,7 @@ function TeacherLogin() {
           className={`p-6 text-center border-b ${
             darkMode
               ? "border-zinc-700 bg-zinc-900"
-              : "border-gray-200 bg-gray-100"
+              : "border-gray-200 bg-white"
           }`}
         >
           <h2 className="text-2xl font-bold flex items-center justify-center gap-2">

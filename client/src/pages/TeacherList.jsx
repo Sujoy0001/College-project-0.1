@@ -42,8 +42,8 @@ const TeacherList = () => {
 
   return (
     <div className="min-h-full px-4 py-6 transition-colors duration-300">
-      <div className={`max-w-6xl mx-auto rounded-lg shadow-md overflow-hidden transition-colors duration-300 ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
-        <div className={`p-4 border-b rounded-t transition-colors duration-300 ${darkMode ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-sky-50'}`}>
+      <div className={`max-w-6xl mx-auto rounded shadow-md overflow-hidden transition-colors duration-300 ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
+        <div className={`p-4 border-b rounded-t transition-colors duration-300 ${darkMode ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-white'}`}>
           <h2 className="text-2xl font-bold flex items-center gap-2">
             <FaUser className="text-blue-500" /> Teacher List
           </h2>

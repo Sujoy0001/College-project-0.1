@@ -15,23 +15,21 @@ const Header2 = () => {
 
   // Handle logout
   const handleLogout = () => {
-    // Clear authentication (example: remove token)
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
-
-    // Redirect to login page
     navigate("/");
   };
 
   return (
     <header
-      className={`py-6 px-0 ${
+      className={`py-4 px-0 ${
         darkMode ? "bg-zinc-800" : "bg-gray-200/50"
       } shadow-sm`}
     >
-      <div className="max-w-7xl px-6 mx-auto flex justify-between items-center">
-        <Link to="/admin">
-          <h1 className="text-2xl font-bold">
+      <div className="max-w-7xl px-4 md:px-6 mx-auto flex flex-wrap justify-between items-center gap-4">
+        {/* Logo / Title */}
+        <Link to="/admin" className="w-full sm:w-auto text-center sm:text-left">
+          <h1 className="text-xl md:text-2xl font-bold">
             <span className={darkMode ? "text-blue-400" : "text-blue-600"}>
               Admin
             </span>{" "}
@@ -39,11 +37,10 @@ const Header2 = () => {
           </h1>
         </Link>
 
-        
-
-        <div className="flex items-center space-x-4">
+        {/* Right section */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
           <span
-            className={`px-3 py-1 rounded-full text-sm ${
+            className={`px-3 py-1 rounded-full text-xs sm:text-sm ${
               darkMode
                 ? "bg-zinc-700 text-blue-400"
                 : "bg-blue-100 text-blue-800"
@@ -51,30 +48,31 @@ const Header2 = () => {
           >
             Administrator
           </span>
+
+          <div className="grid grid-cols-2 gap-4 justify-center items-center">
           {/* Back Button */}
           <button
             onClick={handleBack}
-            className={`px-4 py-2 flex justify-center items-center gap-2 rounded-lg font-medium cursor-pointer ${
+            className={`w-full sm:w-auto px-3 sm:px-4 py-2 flex justify-center items-center gap-2 rounded-lg font-medium cursor-pointer text-sm ${
               darkMode
                 ? "bg-zinc-700 text-blue-400 hover:bg-zinc-600"
                 : "bg-gray-300 text-gray-700 hover:bg-gray-400"
             }`}
           >
-            <FaArrowAltCircleLeft /> Back
+            <FaArrowAltCircleLeft className="text-lg" /> Back
           </button>
 
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className={`px-4 py-2 flex justify-center items-center gap-2 rounded-lg font-medium cursor-pointer ${
+            className={`w-full sm:w-auto px-3 sm:px-4 py-2 flex justify-center items-center gap-2 rounded-lg font-medium cursor-pointer text-sm ${
               darkMode
                 ? "bg-red-600/30 text-white hover:bg-red-500"
                 : "bg-red-400 text-white hover:bg-red-500"
             }`}
           >
-            <FaSignOutAlt /> Logout
-          </button>
-
+            <FaSignOutAlt className="text-lg" /> Logout
+          </button></div>
         </div>
       </div>
     </header>
