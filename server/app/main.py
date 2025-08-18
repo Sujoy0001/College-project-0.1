@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import teacher, admin, course, allotments, view
+from app.routes import teacher, admin, course, allotments, view
 from fastapi.middleware.cors import CORSMiddleware
     
 app = FastAPI()
