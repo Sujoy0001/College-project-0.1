@@ -69,7 +69,6 @@ pylint-global.txt
 # dotenv environment files
 .env
 .env.*
-*.env
 
 # Logs
 *.log
