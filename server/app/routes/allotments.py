@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, EmailStr
 from typing import List
-from db.database import teachers_collection, courses_collection, allotments_collection
+from app.db.database import teachers_collection, courses_collection, allotments_collection
 
 router = APIRouter()
 

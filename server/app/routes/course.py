@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from db.database import courses_collection  # We'll define this in database.py
-from models.course import Course
+from app.db.database import courses_collection  # We'll define this in database.py
+from app.models.course import Course
 
 router = APIRouter()
 

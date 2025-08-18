@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from models.teachers import teachers_register, teacher_login
-from db.database import teachers_collection
-from utils.hash_pass import create_access_token
-from utils.jwt_handler import hash_password, verify_password
+from app.models.teachers import teachers_register, teacher_login
+from app.db.database import teachers_collection
+from app.utils.hash_pass import create_access_token
+from app.utils.jwt_handler import hash_password, verify_password
 
 router = APIRouter()
 

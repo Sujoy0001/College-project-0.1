@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from utils.hash_pass import create_access_token
-from config import ADMIN_CREDENTIALS
+from app.utils.hash_pass import create_access_token
+from app.config import ADMIN_CREDENTIALS
 
 router = APIRouter()
 

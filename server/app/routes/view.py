@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Response
-from db.database import teachers_collection, courses_collection, allotments_collection
+from app.db.database import teachers_collection, courses_collection, allotments_collection
 from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
