@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useTheme } from '../context/ThemeContext';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const EditAllotments = () => {
+  const { darkMode } = useTheme();
   const [teachers, setTeachers] = useState([]);
   const [courses, setCourses] = useState([]);
   const [selectedTeacher, setSelectedTeacher] = useState("");
@@ -119,7 +121,7 @@ const EditAllotments = () => {
       >
         <option value="">-- Select a Teacher --</option>
         {teachers.map((teacher) => (
-          <option key={teacher.email} value={teacher.email}>
+          <option key={teacher.email} value={teacher.email} className={`cursor-pointer ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
             {teacher.name} ({teacher.email})
           </option>
         ))}
@@ -140,7 +142,7 @@ const EditAllotments = () => {
         >
         <option value="">-- Select a Course --</option>
         {courses.map((course) => (
-            <option key={course.id} value={course.id}>
+            <option key={course.id} value={course.id} className={`cursor-pointer ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
             {course.course_name} ({course.course_code})
             </option>
         ))}
