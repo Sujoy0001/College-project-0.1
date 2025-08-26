@@ -46,7 +46,7 @@ const CourseList = () => {
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center min-h-screen ${darkMode ? 'bg-zinc-900' : 'bg-gray-100'}`}>
+      <div className={`flex items-center justify-center min-h-full ${darkMode ? 'bg-zinc-900' : 'bg-gray-100'}`}>
         <FaSpinner className="animate-spin text-4xl text-blue-500" />
         <span className="ml-3">Loading courses...</span>
       </div>
@@ -55,7 +55,7 @@ const CourseList = () => {
 
   if (error) {
     return (
-      <div className={`flex flex-col items-center justify-center min-h-screen p-6 ${darkMode ? 'bg-zinc-900 text-red-400' : 'bg-gray-100 text-red-600'}`}>
+      <div className="flex flex-col items-center justify-center min-h-full p-6" >
         <FaExclamationTriangle className="text-5xl mb-4" />
         <h2 className="text-2xl font-bold mb-2">Error Loading Courses</h2>
         <p className="text-lg mb-4">{error}</p>
@@ -70,7 +70,7 @@ const CourseList = () => {
   }
 
   return (
-    <div className="min-h-screen px-4 py-8">
+    <div className="min-h-full px-4 py-8">
       <div className={`max-w-6xl mx-auto rounded shadow-md overflow-hidden ${darkMode ? 'bg-zinc-800' : 'bg-white'}`}>
         <div className={`p-4 border-b ${darkMode ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-white'}`}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

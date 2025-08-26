@@ -53,7 +53,7 @@ const AdminTeacherList = () => {
   if (loading) {
     return (
       <div
-        className={`flex items-center justify-center min-h-screen ${
+        className={`flex items-center justify-center min-h-full ${
           darkMode ? "bg-zinc-950" : "bg-gray-100"
         }`}
       >
@@ -65,7 +65,7 @@ const AdminTeacherList = () => {
   if (error) {
     return (
       <div
-        className={`flex items-center justify-center min-h-screen ${
+        className={`flex items-center justify-center min-h-full ${
           darkMode ? "bg-zinc-950 text-red-400" : "bg-gray-100 text-red-600"
         }`}
       >

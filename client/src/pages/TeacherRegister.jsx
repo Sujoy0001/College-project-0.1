@@ -77,9 +77,7 @@ function TeacherRegister() {
 
   if (success) {
     return (
-      <div className={`min-h-full flex items-center justify-center p-4 transition-colors duration-300 ${
-        darkMode ? "bg-zinc-900 text-zinc-100" : "bg-gray-50 text-zinc-900"
-      }`}>
+      <div className="min-h-full flex items-center justify-center p-4 transition-colors duration-300">
         <div className={`w-full max-w-md rounded-xl shadow-lg overflow-hidden transition-all duration-300 ${
           darkMode ? "bg-zinc-800 shadow-zinc-950" : "bg-white shadow-gray-200"
         }`}>

@@ -75,7 +75,7 @@ function TeacherDetails() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-full">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="mt-4 text-lg font-medium">Loading your profile...</p>
@@ -86,7 +86,7 @@ function TeacherDetails() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen px-4">
+      <div className="flex items-center justify-center min-h-full px-4">
         <div
           className={`max-w-md w-full p-6 rounded-lg text-center ${
             darkMode ? "bg-zinc-800" : "bg-white"

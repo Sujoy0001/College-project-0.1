@@ -87,7 +87,7 @@ const DownloadPDF = () => {
     switch (status) {
       case 'loading':
         return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
+          <div className="flex flex-col items-center justify-center min-h-full p-6 text-center">
             <FaFilePdf className="text-5xl text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Preparing Download</h2>
             <p className="mb-6">Your PDF file is being prepared for download...</p>
@@ -123,7 +123,7 @@ const DownloadPDF = () => {
       
       case 'error':
         return (
-          <div className={`flex flex-col items-center justify-center min-h-screen p-6 text-center ${darkMode ? 'text-red-400' : 'text-red-600'}`}>
+          <div className={`flex flex-col items-center justify-center min-h-full p-6 text-center ${darkMode ? 'text-red-400' : 'text-red-600'}`}>
             <FaExclamationTriangle className="text-5xl mb-4" />
             <h2 className="text-2xl font-bold mb-2">Download Failed</h2>
             <p className="mb-6 max-w-md">{error}</p>

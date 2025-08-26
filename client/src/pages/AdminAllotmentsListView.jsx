@@ -99,7 +99,7 @@ const AdminAllotmentsListView = () => {
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center min-h-screen ${darkMode ? 'bg-zinc-900' : 'bg-gray-100'}`}>
+      <div className={`flex items-center justify-center min-h-full ${darkMode ? 'bg-zinc-900' : 'bg-gray-100'}`}>
         <FaSpinner className="animate-spin text-4xl text-blue-500" />
         <span className="ml-3">Loading allotments...</span>
       </div>
@@ -109,9 +109,7 @@ const AdminAllotmentsListView = () => {
   if (error) {
     return (
       <div
-        className={`flex flex-col items-center justify-center min-h-screen p-6 ${
-          darkMode ? 'bg-zinc-900 text-red-400' : 'bg-gray-100 text-red-600'
-        }`}
+        className="flex flex-col items-center justify-center min-h-full p-6 "
       >
         <h2 className="text-2xl font-bold mb-2">Error Loading Allotments</h2>
         <p className="text-lg mb-4">{error}</p>

@@ -120,7 +120,7 @@ const AdminCourseList = () => {
   if (loading) {
     return (
       <div
-        className={`flex items-center justify-center min-h-screen ${
+        className={`flex items-center justify-center min-h-full ${
           darkMode ? "bg-zinc-900" : "bg-gray-100"
         }`}
       >
@@ -133,9 +133,7 @@ const AdminCourseList = () => {
   if (error) {
     return (
       <div
-        className={`flex flex-col items-center justify-center min-h-screen p-6 ${
-          darkMode ? "bg-zinc-900 text-red-400" : "bg-gray-100 text-red-600"
-        }`}
+        className="flex flex-col items-center justify-center min-h-full p-6 "
       >
         <FaExclamationTriangle className="text-5xl mb-4" />
         <h2 className="text-2xl font-bold mb-2">Error Loading Courses</h2>
@@ -153,7 +151,7 @@ const AdminCourseList = () => {
   }
 
   return (
-    <div className="min-h-screen px-4 py-8">
+    <div className="min-h-full px-4 py-8">
       <div
         className={`max-w-6xl mx-auto rounded shadow-md overflow-hidden ${
           darkMode ? "bg-zinc-800" : "bg-white"

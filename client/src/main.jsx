@@ -23,6 +23,9 @@ import AdminCourseList from './pages/AdminCourseList.jsx';
 import DownloadPDF from './pages/DownloadList.jsx';
 import AdminAllotmentsListView from './pages/AdminAllotmentsListView.jsx';
 
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,14 +37,17 @@ const router = createBrowserRouter([
       { path: "/teacher/list", element: <TeacherList /> },
       { path: "/course/all", element: <CourseList /> },
       { path: "/allotments/list", element: <AllotmentsListView /> },
-      { path: "/dowload/list", element: <DownloadList />},
+      { path: "/dowload/list", element: <DownloadList /> },
       { path: "/teacher", element: <TeacherDetails /> },
-      
     ]
   },
   {
     path: "/admin",
-    element: <Layout02 />,
+    element: (
+      <ProtectedRoute>
+        <Layout02 />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <AdminDashboard /> },
       { path: "allotments", element: <Allotments /> },
@@ -50,7 +56,7 @@ const router = createBrowserRouter([
       { path: "add", element: <CourseRegister /> },
       { path: "teacher/edit", element: <AdminTeacherList /> },
       { path: "courses/edit", element: <AdminCourseList /> },
-      { path: "dowload/list", element: <DownloadList />},
+      { path: "dowload/list", element: <DownloadList /> },
       { path: "allotmentslist/edit", element: <AdminAllotmentsListView /> },
     ]
   }
@@ -59,7 +65,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
