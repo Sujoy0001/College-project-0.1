@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
 
 function AdminLogin() {
   const { darkMode } = useTheme();
-  // const { login } = useAuth(); // ✅ use AuthContext
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -35,11 +33,9 @@ function AdminLogin() {
 
       const data = await response.json();
 
-      // ✅ Save via AuthContext (this also updates localStorage inside AuthContext)
-      login({
-        token: data.token,
-        email,
-      });
+      // Save admin info
+      localStorage.setItem("adminToken", data.token || ""); // if your backend returns a token
+      localStorage.setItem("adminEmail", email);
 
       // Redirect to Admin Dashboard
       navigate("/admin");
