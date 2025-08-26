@@ -23,9 +23,6 @@ import AdminCourseList from './pages/AdminCourseList.jsx';
 import DownloadPDF from './pages/DownloadList.jsx';
 import AdminAllotmentsListView from './pages/AdminAllotmentsListView.jsx';
 
-import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext.jsx";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,9 +41,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <ProtectedRoute>
-        <Layout02 />
-      </ProtectedRoute>
+      <Layout02 />
     ),
     children: [
       { index: true, element: <AdminDashboard /> },
@@ -65,9 +60,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+      <RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>
 );
