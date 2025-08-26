@@ -120,10 +120,7 @@ const AdminCourseList = () => {
   if (loading) {
     return (
       <div
-        className={`flex items-center justify-center min-h-full ${
-          darkMode ? "bg-zinc-900" : "bg-gray-100"
-        }`}
-      >
+        className="flex items-center justify-center min-h-full ">
         <FaSpinner className="animate-spin text-4xl text-blue-500" />
         <span className="ml-3">Loading courses...</span>
       </div>
