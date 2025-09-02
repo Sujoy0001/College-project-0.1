@@ -1,25 +1,19 @@
+// components/ResetPasswordForm.jsx
 import React, { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext"; // ✅ import dark/light context
+import { useTheme } from "../context/ThemeContext";
 
-function ResetPassword() {
+function ResetPasswordForm({ email, token, onSuccess }) {
   const { darkMode } = useTheme();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  const email = searchParams.get("email");
-  const token = searchParams.get("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
 
-    // ✅ check confirm password
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -36,75 +30,63 @@ function ResetPassword() {
       );
 
       if (!response.ok) {
-        throw new Error("Invalid or expired token");
+        throw new Error("Failed to reset password");
       }
 
-      setMessage("Password reset successfully! Redirecting to login...");
+      setMessage("Password reset successfully!");
       setPassword("");
       setConfirmPassword("");
-      setTimeout(() => navigate("/login"), 2000);
+
+      if (onSuccess) onSuccess();
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div
-      className="flex p-12 items-center justify-center min-h-full"
-    >
-      <div
-        className={`w-full max-w-md p-6 rounded-xl shadow ${
-          darkMode ? "bg-zinc-800 text-white" : "bg-white text-gray-900"
-        }`}
-      >
-        <h2 className="text-2xl font-bold text-center mb-4">
+    <div>
+      <h2 className="text-xl font-bold mb-4 text-center">Reset Password</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="password"
+          placeholder="Enter new password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
+            darkMode
+              ? "bg-zinc-700 border-zinc-600 text-white placeholder-gray-400"
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
+        />
+        <input
+          type="password"
+          placeholder="Confirm new password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
+            darkMode
+              ? "bg-zinc-700 border-zinc-600 text-white placeholder-gray-400"
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
+        />
+        <button
+          type="submit"
+          className={`w-full px-4 py-2 rounded-lg text-white font-medium transition ${
+            darkMode
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-green-500 hover:bg-green-600"
+          }`}
+        >
           Reset Password
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="password"
-            placeholder="Enter new password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-              darkMode
-                ? "bg-zinc-700 border-zinc-600 text-white placeholder-gray-400"
-                : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
-            }`}
-          />
-          <input
-            type="password"
-            placeholder="Confirm new password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-              darkMode
-                ? "bg-zinc-700 border-zinc-600 text-white placeholder-gray-400"
-                : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
-            }`}
-          />
-          <button
-            type="submit"
-            className={`w-full px-4 py-2 rounded-lg text-white font-medium transition ${
-              darkMode
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-green-500 hover:bg-green-600"
-            }`}
-          >
-            Reset Password
-          </button>
-        </form>
+        </button>
+      </form>
 
-        {/* Messages */}
-        {message && (
-          <p className="mt-4 text-green-500 text-center">{message}</p>
-        )}
-        {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
-      </div>
+      {message && <p className="mt-4 text-green-500 text-center">{message}</p>}
+      {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
     </div>
   );
 }
 
-export default ResetPassword;
+export default ResetPasswordForm;
