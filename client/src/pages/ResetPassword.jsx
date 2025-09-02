@@ -27,7 +27,7 @@ function ResetPassword() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/teacher/reset-password`,
+        `${import.meta.env.VITE_BASE_URL}/auth/reset-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
