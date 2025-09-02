@@ -3,7 +3,7 @@ import ssl
 import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from app.config import SMTP_SERVER, SMTP_PORT, SMTP_EMAIL, SMTP_PASSWORD
+from app.config import SMTP_SERVER, SMTP_PORT, SMTP_EMAIL, SMTP_PASSWORD, FRONTEND_URL
 
 def send_reset_email(to_email: str, reset_token: str):
     try:
@@ -13,7 +13,7 @@ def send_reset_email(to_email: str, reset_token: str):
         msg["From"] = SMTP_EMAIL
         msg["To"] = to_email
 
-        reset_link = f"http://localhost:8000/reset-password?email={to_email}&token={reset_token}"
+        reset_link = f"{FRONTEND_URL}/reset-password?email={to_email}&token={reset_token}"
 
         text = f"Hi,\n\nClick the link below to reset your password:\n{reset_link}\n\nThis link will expire in 15 minutes."
         html = f"""

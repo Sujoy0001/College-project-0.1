@@ -22,6 +22,7 @@ import AdminTeacherList from './pages/AdminTeacherDetails.jsx';
 import AdminCourseList from './pages/AdminCourseList.jsx';
 import DownloadPDF from './pages/DownloadList.jsx';
 import AdminAllotmentsListView from './pages/AdminAllotmentsListView.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/allotments/list", element: <AllotmentsListView /> },
       { path: "/dowload/list", element: <DownloadList /> },
       { path: "/teacher", element: <TeacherDetails /> },
+      { path: "/reset-password", element: <ResetPassword /> },
     ]
   },
   {
