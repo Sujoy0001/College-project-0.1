@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.models.teachers import teachers_register, teacher_login
+from app.models.teachers import teachers_register, teacher_login, ResetPasswordRequest
 from app.db.database import teachers_collection
 from app.utils.hash_pass import create_access_token
 from app.utils.jwt_handler import hash_password, verify_password
@@ -77,23 +77,18 @@ async def delete_teacher(email: str):
     return {"message": f"Teacher with email {email} deleted successfully"}
 
 @router.post("/forgot-password")
-async def forgot_password(email: str):
-    user = await teachers_collection.find_one({"email": email})
+async def reset_password(request: ResetPasswordRequest):
+    # Find user by email
+    user = await teachers_collection.find_one({"email": request.email})
+
     if not user:
-        raise HTTPException(status_code=404, detail="Email not registered")
+        raise HTTPException(status_code=404, detail="User with this email not found")
 
-    # Generate reset token
-    reset_token = secrets.token_urlsafe(32)
-    expiry = datetime.utcnow() + timedelta(minutes=15)
-
+    # Hash and update password
+    hashed_pw = hash_password(request.password)
     await teachers_collection.update_one(
-        {"email": email},
-        {"$set": {"reset_token": reset_token, "reset_expires": expiry}}
+        {"email": request.email},
+        {"$set": {"password": hashed_pw}, "$unset": {"reset_token": "", "reset_expires": ""}}
     )
 
-    # Send email with token
-    if not send_reset_email(email, reset_token):
-        raise HTTPException(status_code=500, detail="Failed to send reset email")
-
-    return {"message": "Password reset email sent successfully"}
-
+    return {"message": "Password reset successfully"}
