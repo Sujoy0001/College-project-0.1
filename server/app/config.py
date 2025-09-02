@@ -16,3 +16,8 @@ ADMIN_CREDENTIALS = [
     (os.getenv("ADMIN_EMAIL_2"), os.getenv("ADMIN_PASS_2")),
     (os.getenv("ADMIN_EMAIL_3"), os.getenv("ADMIN_PASS_3")),
 ]
+
+SMTP_SERVER = os.getenv("SMTP_SERVER")
+SMTP_PORT = int(os.getenv("SMTP_PORT"))
+SMTP_EMAIL = os.getenv("SMTP_EMAIL")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")

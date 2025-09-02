@@ -3,6 +3,9 @@ from app.models.teachers import teachers_register, teacher_login
 from app.db.database import teachers_collection
 from app.utils.hash_pass import create_access_token
 from app.utils.jwt_handler import hash_password, verify_password
+from app.send_email import send_reset_email
+from datetime import datetime, timedelta
+import secrets
 
 router = APIRouter()
 
@@ -72,3 +75,25 @@ async def delete_teacher(email: str):
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Teacher not found")
     return {"message": f"Teacher with email {email} deleted successfully"}
+
+@router.post("/forgot-password")
+async def forgot_password(email: str):
+    user = await teachers_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=404, detail="Email not registered")
+
+    # Generate reset token
+    reset_token = secrets.token_urlsafe(32)
+    expiry = datetime.utcnow() + timedelta(minutes=15)
+
+    await teachers_collection.update_one(
+        {"email": email},
+        {"$set": {"reset_token": reset_token, "reset_expires": expiry}}
+    )
+
+    # Send email with token
+    if not send_reset_email(email, reset_token):
+        raise HTTPException(status_code=500, detail="Failed to send reset email")
+
+    return {"message": "Password reset email sent successfully"}
+

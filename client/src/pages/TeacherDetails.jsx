@@ -6,6 +6,7 @@ function TeacherDetails() {
   const [teacherData, setTeacherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [forgotMessage, setForgotMessage] = useState(null); // ✅ new state
 
   useEffect(() => {
     const fetchTeacherDetails = async () => {
@@ -45,7 +46,7 @@ function TeacherDetails() {
     setTimeout(() => window.location.reload(), 500);
   };
 
-  // ✅ NEW: Download function
+  // ✅ Download function
   const handleDownload = async () => {
     try {
       const email = teacherData.teacher.email;
@@ -60,16 +61,39 @@ function TeacherDetails() {
         throw new Error("Failed to download teacher details");
       }
 
-      // Blob download
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `${teacherData.teacher.name}_details.pdf`; // or .xlsx/.csv
+      link.download = `${teacherData.teacher.name}_details.pdf`;
       link.click();
       window.URL.revokeObjectURL(url);
     } catch (err) {
       alert(err.message);
+    }
+  };
+
+  // ✅ Forgot Password function
+  const handleForgotPassword = async () => {
+    try {
+      const email = teacherData.teacher.email;
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/teacher/forgot-password`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to send password reset email");
+      }
+
+      const data = await response.json();
+      setForgotMessage(data.message || "Reset link sent to your email.");
+    } catch (err) {
+      setForgotMessage(err.message);
     }
   };
 
@@ -167,17 +191,37 @@ function TeacherDetails() {
               </div>
             </div>
 
-            {/* ✅ Download Button */}
-            <button
-              onClick={handleDownload}
-              className={`px-4 py-2 rounded-lg font-medium shadow cursor-pointer ${
-                darkMode
-                  ? "bg-blue-600 hover:bg-blue-700"
-                  : "bg-blue-500 hover:bg-blue-600"
-              } text-white transition`}
-            >
-              Download
-            </button>
+            <div className="flex flex-col gap-3">
+              {/* ✅ Download Button */}
+              <button
+                onClick={handleDownload}
+                className={`px-4 py-2 rounded-lg font-medium shadow cursor-pointer ${
+                  darkMode
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-blue-500 hover:bg-blue-600"
+                } text-white transition`}
+              >
+                Download
+              </button>
+
+              {/* ✅ Forgot Password Button */}
+              <button
+                onClick={handleForgotPassword}
+                className={`px-4 py-2 rounded-lg font-medium shadow cursor-pointer ${
+                  darkMode
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-red-500 hover:bg-red-600"
+                } text-white transition`}
+              >
+                Forgot Password
+              </button>
+
+              {forgotMessage && (
+                <p className="text-sm mt-2 text-green-500 text-center">
+                  {forgotMessage}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
