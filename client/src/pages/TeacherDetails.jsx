@@ -78,7 +78,7 @@ function TeacherDetails() {
     try {
       const email = teacherData.teacher.email;
       const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/teacher/forgot-password`,
+        `${import.meta.env.VITE_BASE_URL}/auth/forgot-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
