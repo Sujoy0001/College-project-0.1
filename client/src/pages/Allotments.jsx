@@ -110,7 +110,7 @@ const Allotments = () => {
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Course Allotments</h2>
+      <h2 className="text-2xl font-bold mb-4">Edit Allotments</h2>
 
       {/* Teacher Dropdown */}
       <label className="block font-medium">Select Teacher:</label>

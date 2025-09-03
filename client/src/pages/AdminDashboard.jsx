@@ -71,12 +71,12 @@ function AdminDashboard() {
   const adminTools = [
     {
       name: "Assign Courses",
-      path: "/admin/allotments",
+      path: "/admin/allotments/edit",
       icon: <FaPaperclip className="text-xl" />,
     },
     {
       name: "Edit Allotments",
-      path: "/admin/allotments/edit",
+      path: "/admin/allotments",
       icon: <FaEdit className="text-xl" />,
     },
     {

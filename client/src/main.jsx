@@ -23,6 +23,7 @@ import AdminCourseList from './pages/AdminCourseList.jsx';
 import DownloadPDF from './pages/DownloadList.jsx';
 import AdminAllotmentsListView from './pages/AdminAllotmentsListView.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
+import { NotificationProvider } from "./context/NotificationContext";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <NotificationProvider>
+        <RouterProvider router={router} />
+      </NotificationProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
