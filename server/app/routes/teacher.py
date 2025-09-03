@@ -1,11 +1,14 @@
 from fastapi import APIRouter, HTTPException
-from app.models.teachers import teachers_register, teacher_login, ResetPasswordRequest
+from app.models.teachers import teachers_register, teacher_login, RequestEmail, ResetPasswordRequest
 from app.db.database import teachers_collection
 from app.utils.hash_pass import create_access_token
 from app.utils.jwt_handler import hash_password, verify_password
-from app.send_email import send_reset_email
-from datetime import datetime, timedelta
-import secrets
+
+import smtplib
+import ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from app.config import SMTP_EMAIL, SMTP_PASSWORD
 
 router = APIRouter()
 
@@ -23,10 +26,14 @@ async def register(user: teachers_register):
         raise HTTPException(status_code=400, detail="Email already registered")
     
     user_dict = user.dict()
+    raw_password = user.password 
     user_dict["password"] = hash_password(user.password)
     user_dict["id"] = await get_next_teachers_id()
 
     await teachers_collection.insert_one(user_dict)
+
+    # Prepare email request model
+    send_email(to_email=user.email, raw_password=raw_password, name=user.name)
 
     return {"message": "Teacher registered successfully", "id": user_dict["id"]}
 
@@ -92,3 +99,42 @@ async def reset_password(request: ResetPasswordRequest):
     )
 
     return {"message": "Password reset successfully"}
+
+
+
+# email send for share user email and password for login 
+
+def send_email(to_email: str, raw_password: str, name: str):
+    subject = "Welcome to Teacher Login Portal 🎉"
+    body = f"""
+    Hi {name},
+
+    Your account has been successfully created! 🎓
+    
+    Here are your login details:
+    Email: {to_email}
+    Password: {raw_password}
+
+    Please keep this information safe. You can change your password after logging in.
+
+    Regards,
+    TCA System
+    """
+
+    # Create the email
+    message = MIMEMultipart()
+    message["From"] = SMTP_EMAIL
+    message["To"] = to_email
+    message["Subject"] = subject
+    message.attach(MIMEText(body, "plain"))
+
+    # Secure connection with Gmail SMTP
+    context = ssl.create_default_context()
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+            server.login(SMTP_EMAIL, SMTP_PASSWORD)
+            server.sendmail(SMTP_EMAIL, to_email, message.as_string())
+        print(f"✅ Email sent successfully to {to_email}")
+    except Exception as e:
+        print(f"❌ Failed to send email: {e}")

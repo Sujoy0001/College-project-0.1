@@ -15,3 +15,8 @@ class teacher_login(BaseModel):
 class ResetPasswordRequest(BaseModel):
     email: EmailStr
     password: str
+
+class RequestEmail(BaseModel):
+    email: EmailStr
+    password: str
+    name: str
